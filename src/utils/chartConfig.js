@@ -107,3 +107,66 @@ export const pieOptions = {
     },
   },
 };
+
+export const lineData = {
+  labels: ["24 juni", "12 juli", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Des"],
+  datasets: [
+    {
+      label: "Data One",
+      borderColor: "white",
+      backgroundColor: "red",
+      data: [75000, 76000, 60000, 80000, 72000, 69000, 71000, 68000, 82000, 66000, 70000, 67000],
+      borderWidth: 1,
+      pointRadius: window.innerWidth < 768 ? 3 : 5,
+      pointBorderWidth: 1,
+    },
+  ],
+};
+export const lineOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      labels: {
+        color: "white",
+        borderWidth: 0,
+        font: {
+          size: window.innerWidth < 768 ? 10 : 12,
+          weight: "600",
+        },
+        usePointStyle: true, // Mengubah kotak menjadi lingkaran
+        pointStyle: "circle", // Bentuk titik: 'circle', 'triangle', 'rect', 'cross', 'star', dll
+        boxWidth: 15,
+      },
+    },
+    datalabels: false,
+  },
+  scales: {
+    x: {
+      ticks: {
+        color: "white", // Warna label horizontal
+        font: {
+          size: window.innerWidth < 768 ? 8 : 12, // Ukuran font (opsional)
+          family: "Arial", // Font family (opsional)
+          weight: "600",
+        },
+      },
+      grid: {
+        color: "rgba(255,255,255,10)", // Warna garis grid horizontal
+        lineWidth: 0.3, // Ketebalan garis grid
+      },
+    },
+    y: {
+      ticks: {
+        color: "rgba(255, 255, 255, 0.8)", // Warna label vertikal
+        font: {
+          size: window.innerWidth < 768 ? 8 : 12, // Ukuran font label sumbu Y
+        },
+      },
+      grid: {
+        color: "rgba(255,255,255,10)", // Warna garis grid horizontal
+        lineWidth: 0.3, // Ketebalan garis grid
+      },
+    },
+  },
+};

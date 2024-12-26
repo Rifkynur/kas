@@ -21,7 +21,7 @@ const props = defineProps({
   <section class="w-full p-4">
     <div class="md:p-6 rounded-md h-full text-white">
       <h1 class="font-bold text-xl mb-8">Tambah {{ title }}</h1>
-      <form @submit.prevent="handleAddIncomeSubmit" class="flex flex-col gap-6 mt-4 md:w-9/12 mx-auto">
+      <form @submit.prevent="handleAddIncomeSubmit" class="flex flex-col gap-6 mt-4 w-9/12 mx-auto">
         <div class="flex flex-col gap-4 w-full">
           <label class="font-semibold">Penaggung Jawab</label>
           <input type="text" name="name" class="bg-transparent border p-3 text-white/90 focus:outline-none focus:border-blue-500 focus:border-2 rounded-md" placeholder="Masukan Nama" v-model="dataIncome.name" autocomplete="off" />

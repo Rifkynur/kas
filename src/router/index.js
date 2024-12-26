@@ -36,6 +36,11 @@ const router = createRouter({
       component: () => import("../views/OutcomeView.vue"),
     },
     {
+      path: "/outcome/add",
+      name: "add-outcome",
+      component: () => import("../views/AddOutcome.vue"),
+    },
+    {
       path: "/recap",
       name: "recap",
       component: () => import("../views/RecapView.vue"),

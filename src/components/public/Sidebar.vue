@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink } from "vue-router";
-import { HomeIcon, ChartPieIcon, WalletIcon, ShoppingCartIcon } from "@heroicons/vue/24/solid";
+import { HomeIcon, ChartPieIcon, WalletIcon, ShoppingCartIcon, UserIcon } from "@heroicons/vue/24/solid";
 import { useToggleSidebarStore } from "../../stores/toggleSidebar";
 import { computed } from "vue";
 
@@ -35,6 +35,12 @@ const sidebarIsOpen = computed(() => {
         <router-link to="/recap" active-class="text-blue-500" class="flex items-center gap-3">
           <ChartPieIcon class="size-5" />
           <p class="font-semibold">Rekapitulasi</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/login" active-class="text-blue-500" class="flex items-center gap-3">
+          <UserIcon class="size-5" />
+          <p class="font-semibold">Login</p>
         </router-link>
       </li>
     </ul>

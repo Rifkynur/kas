@@ -1,6 +1,6 @@
 <script setup>
 import { CircleStackIcon, ScaleIcon, ChartBarIcon } from "@heroicons/vue/24/solid";
-import { formatRupiah } from "../../utils.js";
+import { formatRupiah } from "../../utils/utils.js";
 const props = defineProps({
   color: {
     type: String,
