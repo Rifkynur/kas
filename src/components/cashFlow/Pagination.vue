@@ -1,10 +1,11 @@
 <script setup>
 import { computed, ref, onMounted } from "vue";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/24/solid";
 const post = ref();
 const isLoading = ref(true);
 const itemPerPage = ref(3);
 const currentPage = ref(1);
-const totalPage = ref(19);
+const totalPage = ref(5);
 // const getData = async () => {
 //   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
 //   const data = await response.json();
@@ -27,7 +28,7 @@ const visiblePost = computed(() => {
 const visiblePageNumber = computed(() => {
   let pageNumber = [];
   if (totalPage.value <= 7) {
-    for (let i = 1; i < totalPage.value; i++) {
+    for (let i = 1; i <= totalPage.value; i++) {
       pageNumber.push(i);
     }
   } else {
@@ -59,24 +60,34 @@ const filteredPageNumbers = computed(() =>
 </script>
 <template>
   <div class="w-full flex items-center justify-center mt-3">
-    <ul class="flex gap-3">
-      <li>
-        <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">previous</button>
+    <ul class="flex gap-2 items-center md:gap-4">
+      <li class="p-1 text-xs rounded-full flex items-center justify-center">
+        <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">
+          <ChevronLeftIcon class="size-3 md:size-5" />
+        </button>
       </li>
-      <li v-for="item in filteredPageNumbers" :key="item">
-        <button v-if="!item.isPlaceholder" :class="{ active: currentPage === item.value }" @click="changePage(item.value)">
+      <li
+        v-for="item in filteredPageNumbers"
+        :key="item"
+        :class="{ active: currentPage === item.value }"
+        @click="changePage(item.value)"
+        class="p-1 text-xs flex items-center justify-center font-semibold size-6 rounded-full md:text-lg md:size-8"
+      >
+        <button v-if="!item.isPlaceholder">
           {{ item.value }}
         </button>
         <span v-else>{{ item.value }}</span>
       </li>
-      <li>
-        <button @click="changePage(currentPage + 1)" :disabled="currentPage === totalPage.value">Next</button>
+      <li class="p-1 text-xs rounded-full flex items-center justify-center">
+        <button @click="changePage(currentPage + 1)" :disabled="currentPage === totalPage.value">
+          <ChevronRightIcon class="size-3 md:size-5" />
+        </button>
       </li>
     </ul>
   </div>
 </template>
 <style scoped>
 .active {
-  background: black;
+  @apply bg-blue-600;
 }
 </style>

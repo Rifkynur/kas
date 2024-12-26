@@ -12,7 +12,7 @@ const handleSidebar = computed(() => {
 
 const router = useRouter();
 const login = computed(() => {
-  router.push("login");
+  router.push("/login");
 });
 </script>
 
