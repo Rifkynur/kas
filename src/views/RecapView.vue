@@ -2,13 +2,13 @@
 import RecapChart from "../components/recap/RecapChart.vue";
 </script>
 <template>
-  <section class="text-white w-full p-2 md:p-4">
+  <section class="w-full p-2 md:p-4 text-slate-900 dark:text-white">
     <div class="w-full h-full py-6 rounded-md">
       <h1 class="font-bold text-2xl">Rekapitulasi</h1>
       <div>
         <div class="mt-5 flex items-center gap-2">
           <label for="">Pilih RT</label>
-          <select name="" id="" class="bg-transparent border px-4 py-2 rounded-md focus:bg-transparent appearance-none">
+          <select name="" id="" class="bg-transparent border px-4 py-2 rounded-md focus:bg-transparent appearance-none border-black dark:border-white focus:outline-none">
             <option value="" class="bg-transparent">Rt 09</option>
             <option value="" class="bg-transparent" selected>Rt 10</option>
             <option value="" class="bg-transparent">Rt 11</option>
@@ -23,6 +23,6 @@ import RecapChart from "../components/recap/RecapChart.vue";
 </template>
 <style scoped>
 option {
-  background-color: rgba(0, 0, 0, 0.8) !important;
+  @apply bg-black text-white dark:bg-gray-300 dark:text-slate-900;
 }
 </style>

@@ -63,7 +63,7 @@ const filteredPageNumbers = computed(() =>
     <ul class="flex gap-2 items-center md:gap-4">
       <li class="p-1 text-xs rounded-full flex items-center justify-center">
         <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1">
-          <ChevronLeftIcon class="size-3 md:size-5" />
+          <ChevronLeftIcon class="size-3 md:size-5 text-black dark:text-white" />
         </button>
       </li>
       <li
@@ -71,7 +71,7 @@ const filteredPageNumbers = computed(() =>
         :key="item"
         :class="{ active: currentPage === item.value }"
         @click="changePage(item.value)"
-        class="p-1 text-xs flex items-center justify-center font-semibold size-6 rounded-full md:text-lg md:size-8"
+        class="p-1 text-xs flex items-center justify-center font-semibold size-6 rounded-full md:text-lg md:size-8 text-black dark:text-white"
       >
         <button v-if="!item.isPlaceholder">
           {{ item.value }}
@@ -80,7 +80,7 @@ const filteredPageNumbers = computed(() =>
       </li>
       <li class="p-1 text-xs rounded-full flex items-center justify-center">
         <button @click="changePage(currentPage + 1)" :disabled="currentPage === totalPage.value">
-          <ChevronRightIcon class="size-3 md:size-5" />
+          <ChevronRightIcon class="size-3 md:size-5 text-black dark:text-white" />
         </button>
       </li>
     </ul>
@@ -88,6 +88,6 @@ const filteredPageNumbers = computed(() =>
 </template>
 <style scoped>
 .active {
-  @apply bg-blue-600;
+  @apply bg-[#FB4141] dark:bg-blue-600;
 }
 </style>

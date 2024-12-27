@@ -6,14 +6,13 @@ import Navbar from "./components/public/Navbar.vue";
 
 const route = useRoute();
 const hideSidebar = computed(() => ["/login", "/register"].includes(route.path));
-console.log(hideSidebar);
 </script>
 
 <template>
-  <main class="bg-primary min-h-screen font-poppins">
+  <main class="min-h-screen font-poppins bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 dark:bg-gradient-to-r dark:from-primary dark:to-primary">
     <Navbar />
     <div class="relative flex">
-      <Sidebar v-if="!hideSidebar" />
+      <Sidebar />
       <RouterView />
     </div>
   </main>
