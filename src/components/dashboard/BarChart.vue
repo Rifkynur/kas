@@ -9,7 +9,7 @@ const { barData } = getBarData();
 const { barOptions } = getBarOption();
 </script>
 <template>
-  <div class="w-full h-80 rounded-md bg-white bg-opacity-20 dark:bg-slate-700 p-1 dark:border-none">
+  <div class="w-full h-80 rounded-md backdrop-blur-lg bg-white bg-opacity-20 dark:bg-slate-700 p-1 dark:border-none">
     <Bar :data="barData" :options="barOptions" class="w-full text-white" />
   </div>
 </template>

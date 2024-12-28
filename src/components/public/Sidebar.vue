@@ -29,7 +29,7 @@ const sidebarIsOpen = computed(() => {
         </router-link>
       </li>
       <li>
-        <router-link to="/outcome" active-class="text-slate-900 dark:text-blue-500" class="flex items-center gap-3">
+        <router-link to="/expense" active-class="text-slate-900 dark:text-blue-500" class="flex items-center gap-3">
           <ShoppingCartIcon class="size-5" />
           <p class="font-semibold">Pengeluaran</p>
         </router-link>

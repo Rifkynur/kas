@@ -6,7 +6,7 @@ import { useRouter } from "vue-router";
 export const useHandleCashFlow = () => {
   const greaterThanZero = (value) => value > 0;
 
-  const dataIncome = reactive({
+  const dataInput = reactive({
     name: "",
     amount: "",
     date: "",
@@ -22,15 +22,15 @@ export const useHandleCashFlow = () => {
     };
   });
 
-  const v$ = useVuelidate(rules, dataIncome);
+  const v$ = useVuelidate(rules, dataInput);
 
   const handleAddIncomeSubmit = async () => {
     const result = await v$.value.$validate();
-    console.log(dataIncome);
+    console.log(dataInput);
 
     if (result) {
       alert("berhasil");
-      console.log(JSON.stringify(dataIncome));
+      console.log(JSON.stringify(dataInput));
     } else {
       alert("gagal");
     }
@@ -55,7 +55,7 @@ export const useHandleCashFlow = () => {
   };
 
   return {
-    dataIncome,
+    dataInput,
     v$,
     handleAddIncomeSubmit,
     getValidationMessage,

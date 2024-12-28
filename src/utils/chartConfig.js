@@ -85,7 +85,7 @@ export const getPieData = () => {
     datasets: [
       {
         backgroundColor: darkmodeStore.isDark ? ["#FB4141", "#1d4ed8", "#eab308"] : ["#ff5a5f", "#39ff14", "#ECE852"],
-        data: [3000000, 2400000, 2000000],
+        data: [30000000, 24000000, 20000000],
       },
     ],
   }));

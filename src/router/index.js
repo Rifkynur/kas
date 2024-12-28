@@ -31,13 +31,13 @@ const router = createRouter({
       component: () => import("../views/AddIncome.vue"),
     },
     {
-      path: "/outcome",
-      name: "outcome",
-      component: () => import("../views/OutcomeView.vue"),
+      path: "/expense",
+      name: "expense",
+      component: () => import("../views/ExpensesView.vue"),
     },
     {
-      path: "/outcome/add",
-      name: "add-outcome",
+      path: "/expense/add",
+      name: "add-expense",
       component: () => import("../views/AddOutcome.vue"),
     },
     {

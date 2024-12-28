@@ -4,7 +4,7 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const toAddIncome = () => {
-  router.push("/outcome/add");
+  router.push("/expense/add");
 };
 </script>
 
@@ -13,7 +13,7 @@ const toAddIncome = () => {
     <div class="w-full h-full py-6">
       <div class="flex justify-between items-center">
         <h1 class="font-bold text-2xl">Pengeluaran</h1>
-        <button @click="toAddIncome" class="bg-green-600 px-2 py-1 text-sm md:text-base rounded-md font-semibold md:px-4 md:py-2">Tambah</button>
+        <button @click="toAddIncome" class="bg-green-400 px-2 py-1 text-sm md:text-base rounded-md font-semibold md:px-4 md:py-2 dark:bg-green-600">Tambah</button>
       </div>
       <TableCashFlow />
     </div>

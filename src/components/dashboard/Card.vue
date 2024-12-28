@@ -4,7 +4,7 @@ import { formatRupiah } from "../../utils/utils.js";
 const props = defineProps({
   color: {
     type: String,
-    default: "bg-white bg-opacity-20 backdrop-blur-lg dark:bg-green-600",
+    default: "bg-white bg-opacity-20  dark:bg-green-600",
   },
   cost: {
     type: Number,
@@ -16,7 +16,7 @@ const props = defineProps({
 });
 </script>
 <template>
-  <div :class="['flex items-center gap-3 justify-between py-4 px-3 rounded-md  shadow-md dark:border-none', color]">
+  <div :class="['flex items-center gap-3 justify-between py-4 px-3 rounded-md backdrop-blur-lg  shadow-md dark:border-none', color]">
     <div class="flex items-center justify-center">
       <CircleStackIcon v-if="title === 'Total Saldo'" class="size-6 md:size-14" />
       <ScaleIcon v-else-if="title === 'Pemasukan'" class="size-6 md:size-14" />
