@@ -2,15 +2,34 @@
 import { RouterLink } from "vue-router";
 import { HomeIcon, ChartPieIcon, WalletIcon, ShoppingCartIcon, UserIcon } from "@heroicons/vue/24/solid";
 import { useToggleSidebarStore } from "../../stores/toggleSidebar";
-import { computed } from "vue";
+import { computed, onMounted, onBeforeUnmount, ref } from "vue";
 
+const sidebarRef = ref();
 const toggleSidebar = useToggleSidebarStore();
 const sidebarIsOpen = computed(() => {
   return toggleSidebar.sidebarOpen;
 });
+const sidebarClose = computed(() => {
+  return toggleSidebar.closeSidebar;
+});
+const handleClickOutside = (event) => {
+  const buttonToggle = document.getElementById("button-toggle");
+
+  if (sidebarRef.value && !sidebarRef.value.contains(event.target) && !buttonToggle.contains(event.target)) {
+    toggleSidebar.closeSidebar();
+  }
+};
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener("click", handleClickOutside);
+});
 </script>
 <template>
   <div
+    ref="sidebarRef"
     class="p-6 bg-black bg-opacity-50 backdrop-blur-md w-fit border-r border-black/5 min-h-screen origin-left absolute transition-all duration-300 z-10 md:static dark:bg-secondary text-white/70"
     :class="sidebarIsOpen ? 'left-0' : '-left-full'"
   >

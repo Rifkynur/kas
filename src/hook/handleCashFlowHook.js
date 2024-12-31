@@ -42,7 +42,7 @@ export const useHandleCashFlow = () => {
 
     const error = fieldErrors[0];
     if (error.$validator === "required") {
-      return `${field.charAt(0).toUpperCase() + field.slice(1)} wajib diisi.`;
+      return `data wajib diisi.`;
     }
     if (error.$validator === "numeric") {
       return `format harus berupa angka`;

@@ -15,7 +15,7 @@ const props = defineProps({
   },
 });
 onMounted(() => {
-  flatpickr(".flatpickr", {});
+  flatpickr(".flatpickr", { dateFormat: "d M Y", disableMobile: true });
 });
 </script>
 <template>
@@ -54,7 +54,7 @@ onMounted(() => {
         <div class="flex flex-col gap-4">
           <label class="font-semibold">Tanggal</label>
           <input
-            type="date"
+            type="text"
             name="date"
             class="bg-transparent border p-3 text-white/90 focus:outline-none focus:border-black focus:border-2 rounded-md placeholder:text-white/90 dark:placeholder:text-white/50 dark:focus:border-blue-500 flatpickr"
             placeholder="Masukan Tanggal"

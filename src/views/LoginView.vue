@@ -57,7 +57,7 @@ const getValidationMessage = (field) => {
 </script>
 
 <template>
-  <div class="w-full flex flex-col justify-center items-center h-screen">
+  <div class="w-full flex p-2 flex-col justify-center items-center h-screen">
     <div class="bg-white/20 p-3 rounded-md text-slate-900 dark:text-white">
       <h1 class="font-semibold text-center">LOGIN FORM</h1>
       <div class="p-8">

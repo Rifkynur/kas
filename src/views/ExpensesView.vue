@@ -9,7 +9,7 @@ const toAddIncome = () => {
 </script>
 
 <template>
-  <section class="w-full p-2 md:p-4 text-slate-900 dark:text-white">
+  <section class="w-full h-screen p-2 md:p-4 text-slate-900 dark:text-white">
     <div class="w-full h-full py-6">
       <div class="flex justify-between items-center">
         <h1 class="font-bold text-2xl">Pengeluaran</h1>
