@@ -8,6 +8,6 @@ const { id } = router.params;
 
 <template>
   <section class="w-full min-h-screen">
-    <CashFlowInput :title="'Edit Pemasukan'" />
+    <CashFlowInput :title="'Edit Pengeluaran'" />
   </section>
 </template>

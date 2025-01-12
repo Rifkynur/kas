@@ -1,11 +1,20 @@
 <script setup>
-import { computed, ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
+import { computed, ref, onMounted, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import { useHandleCashFlow } from "../../hook/handleCashFlowHook.js";
 import flatpickr from "flatpickr";
+import { useHandleExpense } from "@/hook/handleExpense.js";
+import { useHandleIncome } from "@/hook/handleIncome.js";
 
-const { dataInput, v$, handleAddIncomeSubmit, getValidationMessage } = useHandleCashFlow();
+const { dataInput, v$, handleCashFlowSubmit, getValidationMessage } = useHandleCashFlow();
+const { getExpenseById, dataExpenseById } = useHandleExpense();
+const { getIncomeById, dataIncomeById } = useHandleIncome();
+
 const router = useRouter();
+const route = useRoute();
+const currentRouteName = route.name;
+const idValue = route.params.id;
+
 const goback = computed(() => {
   router.back();
 });
@@ -16,13 +25,45 @@ const props = defineProps({
 });
 onMounted(() => {
   flatpickr(".flatpickr", { dateFormat: "d M Y", disableMobile: true });
+  if (currentRouteName === "edit-expense") {
+    getExpenseById(idValue);
+  } else if (currentRouteName === "edit-income") {
+    getIncomeById(idValue);
+  }
 });
+
+if (currentRouteName === "edit-expense") {
+  watch(
+    () => dataExpenseById.value,
+    (newData) => {
+      if (newData) {
+        dataInput.name = newData.name || "";
+        dataInput.amount = newData.amount || 0;
+        dataInput.date = newData.date || "";
+        dataInput.desc = newData.desc || "";
+      }
+    }
+  );
+} else {
+  watch(
+    () => dataIncomeById.value,
+    (newData) => {
+      if (newData) {
+        dataInput.name = newData.name || "";
+        dataInput.amount = newData.amount || 0;
+        dataInput.date = newData.date || "";
+        dataInput.desc = newData.desc || "";
+        dataInput.rt = newData.rt || "";
+      }
+    }
+  );
+}
 </script>
 <template>
   <section class="w-full p-4">
     <div class="md:p-6 rounded-md h-full text-white">
-      <h1 class="font-bold text-xl mb-8">Tambah {{ title }}</h1>
-      <form @submit.prevent="handleAddIncomeSubmit" class="flex flex-col gap-6 mt-4 w-9/12 mx-auto">
+      <h1 class="font-bold text-xl mb-8">{{ title }}</h1>
+      <form @submit.prevent="handleCashFlowSubmit" class="flex flex-col gap-6 mt-4 w-9/12 mx-auto">
         <div class="flex flex-col gap-4 w-full">
           <label class="font-semibold">Penaggung Jawab</label>
           <input
@@ -35,6 +76,23 @@ onMounted(() => {
           />
           <p v-if="v$.name.$error" class="text-red-500 text-sm font-semibold">
             {{ getValidationMessage("name") }}
+          </p>
+        </div>
+        <div class="flex flex-col gap-4" v-if="route.path.includes('income')">
+          <label class="font-semibold">Rt</label>
+          <select
+            name="rt"
+            class="bg-transparent border p-3 text-white/90 focus:outline-none focus:border-black focus:border-2 rounded-md placeholder:text-white/90 dark:placeholder:text-white/50 dark:focus:border-blue-500"
+            placeholder="Masukan Jumlah"
+            v-model="dataInput.rt"
+          >
+            <option value="" disabled class="bg-black">masukan Rt</option>
+            <option value="rt09" class="bg-black">RT 09</option>
+            <option value="rt10" class="bg-black">RT 10</option>
+            <option value="rt11" class="bg-black">RT 11</option>
+          </select>
+          <p v-if="v$.amount.$error" class="text-red-500 text-sm font-semibold">
+            {{ getValidationMessage("amount") }}
           </p>
         </div>
         <div class="flex flex-col gap-4">
@@ -51,6 +109,7 @@ onMounted(() => {
             {{ getValidationMessage("amount") }}
           </p>
         </div>
+
         <div class="flex flex-col gap-4">
           <label class="font-semibold">Tanggal</label>
           <input
@@ -84,7 +143,6 @@ onMounted(() => {
         </div>
       </form>
     </div>
-    <p>{{ dataInput.name }}</p>
   </section>
 </template>
 

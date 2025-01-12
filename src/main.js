@@ -1,6 +1,7 @@
 import "./assets/main.css";
 import "flatpickr/dist/themes/dark.css";
 import "flatpickr/dist/flatpickr.min.css";
+import "vue3-toastify/dist/index.css";
 
 import { createApp } from "vue";
 import { createPinia } from "pinia";

@@ -1,28 +1,29 @@
 <script setup>
-import { computed, ref, onMounted } from "vue";
+import { computed, ref, watch, onMounted } from "vue";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/24/solid";
-const post = ref();
-const isLoading = ref(true);
-const itemPerPage = ref(3);
+import { data } from "autoprefixer";
+
+const props = defineProps({
+  data: {
+    type: Array,
+  },
+  itemsPerPage: {
+    type: Number,
+    default: 5,
+  },
+});
+
+const emit = defineEmits(["update:visibleData"]);
 const currentPage = ref(1);
-const totalPage = ref(5);
-// const getData = async () => {
-//   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-//   const data = await response.json();
+const totalPage = computed(() => Math.ceil(props.data.length / props.itemsPerPage));
 
-//   post.value = data;
-//   isLoading.value = false;
-// };
-
-const visiblePost = computed(() => {
-  if (isLoading.value || post.value.length === 0) {
-    alert("kosong");
-    return [];
-  }
-
-  const startPage = (currentPage.value - 1) * itemPerPage.value;
-  const endPage = startPage + itemPerPage.value;
-  return post.value.slice(startPage, endPage);
+const visibleData = computed(() => {
+  const startPage = (currentPage.value - 1) * props.itemsPerPage;
+  const endPage = startPage + props.itemsPerPage;
+  return props.data.slice(startPage, endPage);
+});
+onMounted(() => {
+  emit("update:visibleData", visibleData.value); // Emit data untuk halaman pertama
 });
 
 const visiblePageNumber = computed(() => {
@@ -43,8 +44,9 @@ const visiblePageNumber = computed(() => {
   return pageNumber;
 });
 const changePage = (page) => {
-  if (currentPage.value >= 1 && page <= totalPage.value) {
+  if (typeof page === "number" && currentPage.value >= 1 && page <= totalPage.value) {
     currentPage.value = page;
+    emit("update:visibleData", visibleData.value);
   }
 };
 const filteredPageNumbers = computed(() =>
@@ -53,10 +55,6 @@ const filteredPageNumbers = computed(() =>
     value: number,
   }))
 );
-
-// onMounted(() => {
-//   getData();
-// });
 </script>
 <template>
   <div class="w-full flex items-center justify-center mt-3">

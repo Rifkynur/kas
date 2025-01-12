@@ -3,5 +3,7 @@ import CashFlowInput from "../components/cashFlow/CashFlowInput.vue";
 </script>
 
 <template>
-  <CashFlowInput :title="'Pemasukan'" />
+  <section class="w-full min-h-screen">
+    <CashFlowInput :title="'Tambah Pemasukan'" />
+  </section>
 </template>

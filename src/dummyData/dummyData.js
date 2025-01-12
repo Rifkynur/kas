@@ -1,0 +1,92 @@
+export const dataExpense = [
+  {
+    name: "prastomo",
+    amount: 8000,
+    date: new Date(2022, 9, 3),
+    desc: "print laporan jimpitan",
+  },
+  {
+    name: "prastomo",
+    amount: 24000,
+    date: new Date(2022, 9, 3),
+    desc: "konsumsi rapat inti (penyusunan laporan pertanggungjawaban HUT RI 2022)",
+  },
+  {
+    name: "prastomo",
+    amount: 30000,
+    date: new Date(2022, 9, 8),
+    desc: "penambahan tempat jimpitan",
+  },
+  {
+    name: "prastomo",
+    amount: 110000,
+    date: new Date(2022, 9, 9),
+    desc: "konsumsi rapat dengan warga (Pelaporan Pertanggungjawaban kegiatan HUT RI 2022)",
+  },
+  {
+    name: "prastomo",
+    amount: 40800,
+    date: new Date(2022, 9, 9),
+    desc: "print laporan HUT RI 2022",
+  },
+  {
+    name: "prastomo",
+    amount: 210000,
+    date: new Date(2022, 9, 20),
+    desc: "pembelian net voli",
+  },
+  {
+    name: "prastomo",
+    amount: 19000,
+    date: new Date(2022, 9, 24),
+    desc: "pembelian wadah kartu jimpitan",
+  },
+  {
+    name: "prastomo",
+    amount: 55000,
+    date: new Date(2022, 10, 3),
+    desc: "beli buah (jenguk bapak sugeng RT 11)",
+  },
+  {
+    name: "prastomo",
+    amount: 127296,
+    date: new Date(2022, 12, 18),
+    desc: "pembelian waring lapangan voli",
+  },
+  {
+    name: "prastomo",
+    amount: 20000,
+    date: new Date(2022, 12, 18),
+    desc: "gotong royong lapangan voli",
+  },
+  {
+    name: "prastomo",
+    amount: 306000,
+    date: new Date(2022, 12, 24),
+    desc: "perbaikan MCB tiang listrik,Perbaikan tiang lampu perempatan depan ibu menuk (rt 09),penggantian bohlam depan ibu Herno ( 10),konsumsi perbaikan",
+  },
+  {
+    name: "prastomo",
+    amount: 183000,
+    date: new Date(2022, 12, 24),
+    desc: "pembelian 4 lampu dan 2 vitting (keperluan perbaikan penerangan jalan)",
+  },
+  {
+    name: "prastomo",
+    amount: 435000,
+    date: new Date(2022, 12, 31),
+    desc: "pembelian 1 tikar dan 5 krat gelas (kebutuhan inventaris)",
+  },
+  {
+    name: "prastomo",
+    amount: 25000,
+    date: new Date(2022, 12, 31),
+    desc: "pembelian 10 pcs wadah kartu jimpitan",
+  },
+  {
+    name: "prastomo",
+    amount: 60000,
+    date: new Date(2023, 1, 8),
+    desc: "beli buah (jenguk ibu Tatik Rt 10)",
+  },
+];

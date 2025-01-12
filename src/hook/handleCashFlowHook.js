@@ -1,10 +1,19 @@
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength, helpers, numeric } from "@vuelidate/validators";
-import { reactive, computed } from "vue";
-import { useRouter } from "vue-router";
+import { reactive, computed, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { useHandleExpense } from "./handleExpense";
+import { useHandleIncome } from "./handleIncome";
 
 export const useHandleCashFlow = () => {
-  const greaterThanZero = (value) => value > 0;
+  const route = useRoute();
+  const currentRouteName = route.name;
+  const idParams = route.params.id;
+
+  const { addExpense, editExpense } = useHandleExpense();
+  const { addIncome, editIncome } = useHandleIncome();
+
+  const isValidRT = helpers.withMessage("RT harus salah satu dari: rt09, rt10, rt11", (value) => ["rt09", "rt10", "rt11"].includes(value));
 
   const dataInput = reactive({
     name: "",
@@ -13,26 +22,52 @@ export const useHandleCashFlow = () => {
     desc: "",
   });
 
+  watch(
+    () => route.path,
+    (newPath) => {
+      if (newPath.includes("income")) {
+        dataInput.rt = "";
+      } else {
+        delete dataInput.rt;
+      }
+    },
+    { immediate: true }
+  );
+
   const rules = computed(() => {
-    return {
+    const baseRules = {
       name: { required },
-      amount: { required, greaterThanZero, numeric },
+      amount: { required, numeric },
       date: { required },
       desc: { required },
     };
+
+    if (route.path.includes("income")) {
+      baseRules.rt = { required, isValidRT };
+    }
+
+    return baseRules;
   });
 
   const v$ = useVuelidate(rules, dataInput);
 
-  const handleAddIncomeSubmit = async () => {
+  const handleCashFlowSubmit = async () => {
     const result = await v$.value.$validate();
-    console.log(dataInput);
-
+    // action untuk mengirim form
     if (result) {
-      alert("berhasil");
-      console.log(JSON.stringify(dataInput));
-    } else {
-      alert("gagal");
+      if (route.path.includes("expense")) {
+        if (idParams) {
+          editExpense(dataInput, idParams);
+        } else {
+          addExpense(dataInput);
+        }
+      } else {
+        if (idParams) {
+          editIncome(dataInput, idParams);
+        } else {
+          addIncome(dataInput);
+        }
+      }
     }
   };
 
@@ -47,9 +82,6 @@ export const useHandleCashFlow = () => {
     if (error.$validator === "numeric") {
       return `format harus berupa angka`;
     }
-    if (error.$validator === "greaterThanZero") {
-      return `Harus diisi lebih dari 0`;
-    }
 
     return "Input tidak valid.";
   };
@@ -57,7 +89,7 @@ export const useHandleCashFlow = () => {
   return {
     dataInput,
     v$,
-    handleAddIncomeSubmit,
+    handleCashFlowSubmit,
     getValidationMessage,
   };
 };

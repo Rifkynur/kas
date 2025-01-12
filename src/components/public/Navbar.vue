@@ -6,7 +6,6 @@ import { useDarkModeStore } from "@/stores/darkmode";
 import { ref, onMounted } from "vue";
 
 const toggleSidebar = useToggleSidebarStore();
-const isDark = ref(false);
 const darkModeStore = useDarkModeStore();
 
 const handleSidebar = computed(() => {
@@ -24,7 +23,7 @@ onMounted(() => {
       <button @click="handleSidebar" id="button-toggle">
         <Bars3Icon class="size-6 md:hidden" />
       </button>
-      <h1 class="text-base font-bold capitalize lg:text-xl text-white">Jimpitan Desa Pesu</h1>
+      <!-- <h1 class="text-base font-bold capitalize lg:text-xl text-white">Jimpitan Desa Pesu</h1> -->
     </div>
     <div @click="darkModeStore.handleDarkMode(!darkModeStore.isDark)" class="w-12 border-2 border-black h-6 relative rounded-full cursor-pointer transition-all duration-300 md:w-14 md:h-7 dark:border-white">
       <div class="size-4 rounded-full absolute top-1/2 -translate-y-1/2 transition-all duration-300" :class="darkModeStore.isDark ? 'right-1 text-yellow-500' : 'left-1 '">

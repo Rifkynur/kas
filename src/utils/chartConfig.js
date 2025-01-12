@@ -2,28 +2,53 @@ import { plugins, scales } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { useToggleSidebarStore } from "../stores/toggleSidebar";
 import { useDarkModeStore } from "../stores/darkmode";
-import { computed } from "vue";
+import { computed, onMounted, watch, ref } from "vue";
+import { data } from "autoprefixer";
+import { useGetIncomePerRt } from "../hook/handleGetIncomePerRt";
 
-export const getBarData = () => {
+export const getBarData = (incomePerRtPerYear) => {
+  const rt09Data = ref(Array(12).fill(0));
+  const rt10Data = ref(Array(12).fill(0));
+  const rt11Data = ref(Array(12).fill(0));
   const darkmodeStore = useDarkModeStore();
 
+  watch(
+    incomePerRtPerYear,
+    (newData) => {
+      // Reset data agar tidak bertumpuk
+      rt09Data.value = Array(12).fill(0);
+      rt10Data.value = Array(12).fill(0);
+      rt11Data.value = Array(12).fill(0);
+
+      if (newData && newData.length) {
+        newData.forEach((item) => {
+          const monthIndex = item.month - 1; // Bulan dalam data dimulai dari 1
+          if (item.rt === "rt09") rt09Data.value[monthIndex] += item.totalAmount;
+          if (item.rt === "rt10") rt10Data.value[monthIndex] += item.totalAmount;
+          if (item.rt === "rt11") rt11Data.value[monthIndex] += item.totalAmount;
+        });
+      }
+    },
+    { immediate: true }
+  );
+
   const barData = computed(() => ({
-    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    labels: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"],
     datasets: [
       {
         label: "RT 09",
         backgroundColor: darkmodeStore.isDark ? "#FB4141" : "#ff5a5f",
-        data: [80000, 73000, 52000, 64000, 65000, 65000, 70500, 100000, 42000, 59000, 75000, 68000],
+        data: rt09Data.value,
       },
       {
         label: "RT 10",
         backgroundColor: darkmodeStore.isDark ? "#1d4ed8" : "#39ff14",
-        data: [64000, 60000, 58000, 69000, 70000, 80000, 60000, 70000, 47000, 65000, 68000, 60000],
+        data: rt10Data.value,
       },
       {
         label: "RT 11",
         backgroundColor: darkmodeStore.isDark ? "#eab308" : "#36454f",
-        data: [50000, 71000, 50000, 69000, 80000, 80000, 60000, 64000, 75000, 50000, 50000, 60000],
+        data: rt11Data.value,
       },
     ],
   }));
@@ -77,18 +102,29 @@ export const getBarOption = () => {
   return { barOptions };
 };
 
-export const getPieData = () => {
+export const getPieData = (totalIncomePerRt) => {
+  const baseURL = import.meta.env.VITE_API_BASE_URL;
   const darkmodeStore = useDarkModeStore();
+  // const { getIncomePerRt, incomePerRt } = useGetIncomePerRt();
 
   const pieData = computed(() => ({
-    labels: ["RT 09", "RT 10", "RT 11"],
+    labels: totalIncomePerRt.value.map((item) => {
+      if (item.rt === "rt09") {
+        return "RT 09";
+      } else if (item.rt === "rt10") {
+        return "RT 10";
+      } else {
+        return "RT 11";
+      }
+    }),
     datasets: [
       {
         backgroundColor: darkmodeStore.isDark ? ["#FB4141", "#1d4ed8", "#eab308"] : ["#ff5a5f", "#39ff14", "#ECE852"],
-        data: [30000000, 24000000, 20000000],
+        data: totalIncomePerRt.value.map((data) => data._sum.amount),
       },
     ],
   }));
+
   return { pieData };
 };
 
@@ -104,9 +140,11 @@ export const getPieOptions = () => {
         labels: {
           color: darkmodeStore.isDark ? "white" : "black",
           borderWidth: 0,
+
           font: {
             size: window.innerWidth < 768 ? 10 : 16,
             weight: "600",
+            decoration: "capitalize",
           },
           usePointStyle: true, // Mengubah kotak menjadi lingkaran
           pointStyle: "circle", // Bentuk titik: 'circle', 'triangle', 'rect', 'cross', 'star', dll
@@ -132,22 +170,31 @@ export const getPieOptions = () => {
   return { pieOptions };
 };
 
-export const getLineData = () => {
+export const getLineData = (incomePerQuarter) => {
   const darkmodeStore = useDarkModeStore();
-  const lineData = computed(() => ({
-    labels: ["20 jul", "23 jul", "30 jul", "1 agu", "8 agu", "16 agu", "July", "Aug", "Sep", "Oct", "Nov", "Des"],
-    datasets: [
-      {
-        label: "Data One",
-        borderColor: darkmodeStore.isDark ? "white" : "black",
-        backgroundColor: darkmodeStore.isDark ? "red" : "#ff5a5f",
-        data: [75000, 76000, 60000, 80000, 72000, 69000, 71000, 68000, 82000, 66000, 70000, 67000],
-        borderWidth: 1,
-        pointRadius: window.innerWidth < 768 ? 3 : 5,
-        pointBorderWidth: 1,
-      },
-    ],
-  }));
+  const lineData = computed(() => {
+    return {
+      labels: incomePerQuarter.value.map((item) => {
+        const date = new Date(item.date);
+        return date.toLocaleDateString("default", { day: "numeric", month: "short" });
+      }),
+      datasets: [
+        {
+          label: "Income Data",
+          borderColor: darkmodeStore.isDark ? "white" : "black",
+          backgroundColor: darkmodeStore.isDark ? "red" : "#ff5a5f",
+          data: incomePerQuarter.value.map((item) => {
+            // console.log("Item Name:", item.name); // Pastikan `item.name` ada
+            return item.amount; // Mengembalikan item.amount untuk dataset
+          }),
+          borderWidth: 1,
+          pointRadius: window.innerWidth < 768 ? 3 : 5,
+          pointBorderWidth: 1,
+        },
+      ],
+    };
+  });
+
   return { lineData };
 };
 

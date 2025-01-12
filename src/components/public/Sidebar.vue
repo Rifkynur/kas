@@ -1,17 +1,21 @@
 <script setup>
 import { RouterLink } from "vue-router";
-import { HomeIcon, ChartPieIcon, WalletIcon, ShoppingCartIcon, UserIcon } from "@heroicons/vue/24/solid";
+import { HomeIcon, ChartPieIcon, WalletIcon, ShoppingCartIcon, UserIcon, ListBulletIcon } from "@heroicons/vue/24/solid";
 import { useToggleSidebarStore } from "../../stores/toggleSidebar";
 import { computed, onMounted, onBeforeUnmount, ref } from "vue";
+import { useAuthStore } from "@/stores/auth";
+import ModalLogout from "./ModalLogout.vue";
 
 const sidebarRef = ref();
+
+const authStore = useAuthStore();
 const toggleSidebar = useToggleSidebarStore();
+
+const isLogin = computed(() => authStore.isLogin);
 const sidebarIsOpen = computed(() => {
   return toggleSidebar.sidebarOpen;
 });
-const sidebarClose = computed(() => {
-  return toggleSidebar.closeSidebar;
-});
+
 const handleClickOutside = (event) => {
   const buttonToggle = document.getElementById("button-toggle");
 
@@ -42,6 +46,12 @@ onBeforeUnmount(() => {
         </router-link>
       </li>
       <li>
+        <router-link to="/schedule" exact-active-class="text-slate-900 dark:text-blue-500" class="flex items-center gap-3">
+          <ListBulletIcon class="size-5" />
+          <p class="font-semibold">Jadwal</p>
+        </router-link>
+      </li>
+      <li>
         <router-link to="/income" exact-active-class="text-slate-900 dark:text-blue-500" class="flex items-center gap-3">
           <WalletIcon class="size-5" />
           <p class="font-semibold">Pemasukan</p>
@@ -59,11 +69,18 @@ onBeforeUnmount(() => {
           <p class="font-semibold">Rekapitulasi</p>
         </router-link>
       </li>
-      <li>
+      <li v-if="!isLogin">
         <router-link to="/login" active-class="text-slate-900 dark:text-blue-500" class="flex items-center gap-3">
           <UserIcon class="size-5" />
           <p class="font-semibold">Login</p>
         </router-link>
+      </li>
+      <li v-else @click="authStore.openModalLogout">
+        <button class="flex items-center gap-3">
+          <UserIcon class="size-5" />
+          <p class="font-semibold">logout</p>
+        </button>
+        <ModalLogout :isOpen="authStore.modalLogoutIsOpen" @close="authStore.closeModalLogout" />
       </li>
     </ul>
   </div>
