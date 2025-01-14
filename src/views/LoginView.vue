@@ -7,8 +7,8 @@ const { showPassword, goBack, handleShowPassword, v$, handleLogin, getValidation
 </script>
 
 <template>
-  <div class="w-full flex p-2 flex-col justify-center items-center h-screen">
-    <div class="bg-white/20 p-3 rounded-md text-slate-900 shadow-lg dark:text-white">
+  <div class="w-full flex px-4 bg-black/20 flex-col justify-center items-center h-screen">
+    <div class="bg-white/20 p-3 w-full rounded-md text-slate-900 shadow-lg dark:text-white lg:w-[400px]">
       <img :src="Logo" alt="logo" class="size-20 mx-auto" />
       <h1 class="font-semibold text-center pt-2">Login Form</h1>
       <div class="p-8">
@@ -45,7 +45,7 @@ const { showPassword, goBack, handleShowPassword, v$, handleLogin, getValidation
             {{ getValidationMessage("password") }}
           </p>
           <div class="flex flex-col gap-2">
-            <button class="bg-[#4DA1A9] py-1 font-semibold dark:bg-blue-500" type="submit">Login</button>
+            <button class="bg-blue-500 py-1 font-semibold" type="submit">Login</button>
           </div>
           <p class="text-center text-[8px] capitalize lg:text-[10px]">&copy; sedyo utomo</p>
         </form>

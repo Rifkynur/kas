@@ -1,18 +1,7 @@
 <script setup>
 import { useYearIncomeStore } from "../../../stores/yearIncomeTotal.js";
-import { useGetIncomePerRt } from "@/hook/handleGetIncomePerRt.js";
-import { computed } from "vue";
-import { getLineData } from "@/utils/chartConfig.js";
 
 const { detailIncomePerQuarter } = useYearIncomeStore();
-
-const { getIncomePerQuarter, incomeQuarter } = useGetIncomePerRt();
-
-const fetchDataPerQuarter = () => {
-  getIncomePerQuarter(detailIncomePerQuarter.rt, detailIncomePerQuarter.year, detailIncomePerQuarter.quarter);
-  console.log("data pada select", incomeQuarter);
-  getLineData(incomeQuarter);
-};
 </script>
 
 <template>
@@ -54,7 +43,6 @@ const fetchDataPerQuarter = () => {
           <option value="3" class="bg-black text-white dark:text-black">Juli - September</option>
           <option value="4" class="bg-black text-white dark:text-black">Oktober - Desember</option>
         </select>
-        <button @click="fetchDataPerQuarter" class="font-semibold px-2 w-fit rounded-md shadow-lg bg-green-400 dark:bg-green-600 lg:text-base lg:px-4">cari</button>
       </div>
     </div>
   </div>

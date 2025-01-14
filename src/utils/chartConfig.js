@@ -170,9 +170,13 @@ export const getPieOptions = () => {
   return { pieOptions };
 };
 
-export const getLineData = (incomePerQuarter) => {
+export const getLineData = (income) => {
+  const incomePerQuarter = ref(income);
   const darkmodeStore = useDarkModeStore();
+
   const lineData = computed(() => {
+    console.log(income);
+
     return {
       labels: incomePerQuarter.value.map((item) => {
         const date = new Date(item.date);
@@ -184,8 +188,7 @@ export const getLineData = (incomePerQuarter) => {
           borderColor: darkmodeStore.isDark ? "white" : "black",
           backgroundColor: darkmodeStore.isDark ? "red" : "#ff5a5f",
           data: incomePerQuarter.value.map((item) => {
-            // console.log("Item Name:", item.name); // Pastikan `item.name` ada
-            return item.amount; // Mengembalikan item.amount untuk dataset
+            return item.amount;
           }),
           borderWidth: 1,
           pointRadius: window.innerWidth < 768 ? 3 : 5,
