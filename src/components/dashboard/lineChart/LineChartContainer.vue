@@ -7,7 +7,7 @@ import LineChart from "../LineChart.vue";
   <section class="w-full text-slate-900 dark:text-white">
     <div class="w-full h-full py-6 rounded-md">
       <SelectDetailIncome />
-      <div class="w-full h-72 bg-white/10 p-2 rounded-md mt-3">
+      <div class="w-full h-72 bg-black/20 p-2 rounded-md mt-3 dark:bg-slate-700">
         <LineChart />
       </div>
     </div>

@@ -46,12 +46,12 @@ onMounted(() => {
         <select
           name="itemPerpage"
           v-model="itemsPerPage"
-          class="text-sm bg-transparent border p-1 text-white/90 focus:outline-none focus:border-black focus:border-2 rounded-md placeholder:text-white/90 dark:placeholder:text-white/50 dark:focus:border-blue-500 lg:px-3 lg:text-base"
+          class="text-sm bg-transparent border border-black p-1 text-black focus:outline-none focus:border-black focus:border-2 rounded-md dark:focus:border-blue-500 dark:text-white dark:border-white lg:px-3 lg:text-base"
         >
-          <option :value="5" class="bg-black">5</option>
-          <option :value="10" class="bg-black" selected>10</option>
-          <option :value="15" class="bg-black">15</option>
-          <option :value="20" class="bg-black">20</option>
+          <option :value="5" class="bg-black text-white">5</option>
+          <option :value="10" class="bg-black text-white" selected>10</option>
+          <option :value="15" class="bg-black text-white">15</option>
+          <option :value="20" class="bg-black text-white">20</option>
         </select>
       </div>
       <p v-if="isLoading" class="text-center py-8">Sabar yaa...</p>

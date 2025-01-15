@@ -61,7 +61,7 @@ if (currentRouteName === "edit-expense") {
 </script>
 <template>
   <section class="w-full p-4">
-    <div class="md:p-6 rounded-md h-full text-white">
+    <div class="md:p-6 rounded-md h-full text-black dark:text-white">
       <h1 class="font-bold text-xl mb-8">{{ title }}</h1>
       <form @submit.prevent="handleCashFlowSubmit" class="flex flex-col gap-6 mt-4 w-9/12 mx-auto">
         <div class="flex flex-col gap-4 w-full">
@@ -69,7 +69,7 @@ if (currentRouteName === "edit-expense") {
           <input
             type="text"
             name="name"
-            class="bg-transparent border p-3 text-white/90 focus:outline-none focus:border-black focus:border-2 rounded-md placeholder:text-white/90 dark:placeholder:text-white/50 dark:focus:border-blue-500"
+            class="bg-transparent border border-black p-3 text-black focus:outline-none focus:border-blue-500 focus:border-2 rounded-md placeholder:text-black/50 dark:placeholder:text-white/50 dark:border-white dark:text-white"
             placeholder="Masukan Nama"
             v-model="dataInput.name"
             autocomplete="off"
@@ -82,14 +82,14 @@ if (currentRouteName === "edit-expense") {
           <label class="font-semibold">Rt</label>
           <select
             name="rt"
-            class="bg-transparent border p-3 text-white/90 focus:outline-none focus:border-black focus:border-2 rounded-md placeholder:text-white/90 dark:placeholder:text-white/50 dark:focus:border-blue-500"
+            class="bg-transparent border border-black p-3 text-black focus:border-blue-500 focus:outline-none focus:border-2 rounded-md placeholder:text-black/50 dark:text-white dark:placeholder:text-white/50 dark:border-white"
             placeholder="Masukan Jumlah"
             v-model="dataInput.rt"
           >
-            <option value="" disabled class="bg-black">masukan Rt</option>
-            <option value="rt09" class="bg-black">RT 09</option>
-            <option value="rt10" class="bg-black">RT 10</option>
-            <option value="rt11" class="bg-black">RT 11</option>
+            <option value="" disabled class="bg-black text-white">masukan Rt</option>
+            <option value="rt09" class="bg-black text-white">RT 09</option>
+            <option value="rt10" class="bg-black text-white">RT 10</option>
+            <option value="rt11" class="bg-black text-white">RT 11</option>
           </select>
           <p v-if="v$.amount.$error" class="text-red-500 text-sm font-semibold">
             {{ getValidationMessage("amount") }}
@@ -101,7 +101,7 @@ if (currentRouteName === "edit-expense") {
             type="number"
             name="amount"
             min="0"
-            class="bg-transparent border p-3 text-white/90 focus:outline-none focus:border-black focus:border-2 rounded-md placeholder:text-white/90 dark:placeholder:text-white/50 dark:focus:border-blue-500"
+            class="bg-transparent border border-black p-3 text-black focus:outline-none focus:border-blue-500 focus:border-2 rounded-md placeholder:text-black/50 dark:border-white dark:text-white dark:placeholder:text-white/50"
             placeholder="Masukan Jumlah"
             v-model="dataInput.amount"
           />
@@ -115,7 +115,7 @@ if (currentRouteName === "edit-expense") {
           <input
             type="text"
             name="date"
-            class="bg-transparent border p-3 text-white/90 focus:outline-none focus:border-black focus:border-2 rounded-md placeholder:text-white/90 dark:placeholder:text-white/50 dark:focus:border-blue-500 flatpickr"
+            class="bg-transparent border border-black p-3 text-black focus:outline-none focus:border-blue-500 focus:border-2 rounded-md placeholder:text-black/50 dark:border-white dark:text-white dark:placeholder:text-white/50 flatpickr"
             placeholder="Masukan Tanggal"
             v-model="dataInput.date"
           />
@@ -128,7 +128,7 @@ if (currentRouteName === "edit-expense") {
           <input
             type="text"
             name="desc"
-            class="bg-transparent border p-3 text-white/90 focus:outline-none focus:border-black focus:border-2 rounded-md placeholder:text-white/90 dark:placeholder:text-white/50 dark:focus:border-blue-500"
+            class="bg-transparent border border-black p-3 text-black focus:outline-none focus:border-blue-500 focus:border-2 rounded-md placeholder:text-black/50 dark:border-white dark:text-white dark:placeholder:text-white/50"
             placeholder="Masukan Keterangan"
             v-model="dataInput.desc"
             autocomplete="off"

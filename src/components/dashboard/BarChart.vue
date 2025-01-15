@@ -29,7 +29,7 @@ watch(selectYear, (newYear) => {
 });
 </script>
 <template>
-  <div class="w-full h-80 rounded-md backdrop-blur-lg bg-white/40 dark:bg-slate-700 p-1 dark:border-none">
+  <div class="w-full h-80 rounded-md bg-black/20 dark:bg-slate-700 p-1 dark:border-none">
     <p v-if="loading" class="font-bold capitalize flex justify-center items-center py-8">sabar yaa...</p>
     <Bar v-else :data="barData" :options="barOptions" class="w-full text-white" />
   </div>

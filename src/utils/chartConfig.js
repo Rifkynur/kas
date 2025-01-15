@@ -175,8 +175,6 @@ export const getLineData = (income) => {
   const darkmodeStore = useDarkModeStore();
 
   const lineData = computed(() => {
-    console.log(income);
-
     return {
       labels: incomePerQuarter.value.map((item) => {
         const date = new Date(item.date);
@@ -184,7 +182,7 @@ export const getLineData = (income) => {
       }),
       datasets: [
         {
-          label: "Income Data",
+          label: "Pemasukan",
           borderColor: darkmodeStore.isDark ? "white" : "black",
           backgroundColor: darkmodeStore.isDark ? "red" : "#ff5a5f",
           data: incomePerQuarter.value.map((item) => {

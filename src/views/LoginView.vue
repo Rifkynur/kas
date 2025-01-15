@@ -7,8 +7,8 @@ const { showPassword, goBack, handleShowPassword, v$, handleLogin, getValidation
 </script>
 
 <template>
-  <div class="w-full flex px-4 bg-black/20 flex-col justify-center items-center h-screen">
-    <div class="bg-white/20 p-3 w-full rounded-md text-slate-900 shadow-lg dark:text-white lg:w-[400px]">
+  <div class="w-full flex px-4 flex-col justify-center items-center h-screen">
+    <div class="bg-[#D2E0FB] p-3 w-full rounded-md text-slate-900 shadow-lg dark:bg-white/20 dark:text-white lg:w-[400px]">
       <img :src="Logo" alt="logo" class="size-20 mx-auto" />
       <h1 class="font-semibold text-center pt-2">Login Form</h1>
       <div class="p-8">

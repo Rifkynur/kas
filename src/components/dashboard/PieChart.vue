@@ -31,7 +31,7 @@ watch(selectYear, (newyear) => {
 });
 </script>
 <template>
-  <div class="w-full h-80 rounded-md bg-white/40 p-1 lg:w-[35%] dark:bg-slate-700 dark:border-none">
+  <div class="w-full h-80 rounded-md bg-black/20 p-1 lg:w-[35%] dark:bg-slate-700 dark:border-none">
     <p v-if="loading" class="font-bold capitalize flex justify-center items-center py-8">sabar yaa...</p>
     <Pie v-else :data="pieData" :options="pieOptions" />
   </div>

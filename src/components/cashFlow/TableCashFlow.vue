@@ -44,19 +44,19 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="overflow-auto mt-8 p-2 w-full">
-    <table class="bg-white/20 rounded-md overflow-auto w-[670px] lg:w-full dark:bg-gray-700">
+  <div class="overflow-auto mt-8 w-full">
+    <table class="bg-black/20 rounded-md overflow-auto w-[670px] lg:w-full dark:bg-gray-700">
       <thead>
         <tr class="text-sm md:text-base text-slate-900 dark:text-white">
           <th class="p-2 text-start w-[5%]">No</th>
           <th class="p-2 text-start w-[10%]">Nama</th>
-          <th class="p-2 text-start w-[20%]">tanggal</th>
-          <th class="p-2 text-start w-[10%]">jumlah</th>
-          <th class="p-2 text-start w-[35%]">keterangan</th>
+          <th class="p-2 text-start w-[20%]">Tanggal</th>
+          <th class="p-2 text-start w-[10%]">Jumlah</th>
+          <th class="p-2 text-start w-[35%]">Keterangan</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in data" :key="item?.id" class="text-sm align-top odd:bg-white/30 even:bg-white/40 border-t md:text-base dark:even:bg-secondary dark:odd:bg-white/10 dark:text-white">
+        <tr v-for="(item, index) in data" :key="item?.id" class="text-sm align-top odd:bg-slate-200 even:bg-slate-300 border-t border-black md:text-base dark:border-white dark:even:bg-secondary dark:odd:bg-white/10 dark:text-white">
           <td class="p-2 font-semibold lg:py-5 lg:px-3">{{ index + 1 }}</td>
           <td class="p-2 font-semibold lg:py-5 lg:px-3 flex flex-col capitalize">
             <ul class="flex flex-col gap-1">

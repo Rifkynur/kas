@@ -4,7 +4,7 @@ import { formatRupiah } from "../../utils/utils.js";
 const props = defineProps({
   color: {
     type: String,
-    default: "bg-green-400  dark:bg-green-600",
+    default: "bg-[#A7D477]  dark:bg-green-600",
   },
   cost: {
     type: Number,

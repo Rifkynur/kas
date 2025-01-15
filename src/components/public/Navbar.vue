@@ -18,7 +18,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <nav class="w-full bg-[#2a2a2a] bg-opacity-40 backdrop-blur-md p-3 flex justify-between items-center shadow-md dark:text-white dark:bg-white/20">
+  <nav class="w-full bg-[#08C2FF] backdrop-blur-md p-3 flex justify-between items-center shadow-md dark:text-white dark:bg-white/20">
     <div class="flex items-center gap-2">
       <button @click="handleSidebar" id="button-toggle">
         <Bars3Icon class="size-6 md:hidden" />
