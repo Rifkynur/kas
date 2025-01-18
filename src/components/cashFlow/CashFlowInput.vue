@@ -5,6 +5,7 @@ import { useHandleCashFlow } from "../../hook/handleCashFlowHook.js";
 import flatpickr from "flatpickr";
 import { useHandleExpense } from "@/hook/handleExpense.js";
 import { useHandleIncome } from "@/hook/handleIncome.js";
+import { useIsSumbitting } from "@/stores/submitting.js";
 
 const { dataInput, v$, handleCashFlowSubmit, getValidationMessage } = useHandleCashFlow();
 const { getExpenseById, dataExpenseById } = useHandleExpense();
@@ -14,6 +15,8 @@ const router = useRouter();
 const route = useRoute();
 const currentRouteName = route.name;
 const idValue = route.params.id;
+
+const submit = useIsSumbitting();
 
 const goback = computed(() => {
   router.back();
@@ -138,7 +141,7 @@ if (currentRouteName === "edit-expense") {
           </p>
         </div>
         <div class="flex items-center gap-3">
-          <button type="submit" class="font-semibold w-fit px-3 py-1 rounded-md shadow-lg bg-green-400 dark:bg-green-600">Kirim</button>
+          <button type="submit" class="font-semibold w-fit px-3 py-1 rounded-md shadow-lg bg-green-400 dark:bg-green-600" :disabled="submit.isSubmit">{{ submit.isSubmit ? "Bentar ya ..." : "Kirim" }}</button>
           <button @click="goback" type="button" class="font-semibold w-fit px-3 py-1 rounded-md shadow-lg bg-red-400 dark:bg-red-600">Batal</button>
         </div>
       </form>

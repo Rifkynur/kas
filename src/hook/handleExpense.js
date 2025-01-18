@@ -3,6 +3,7 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useNotify } from "@/utils/utils";
+import { useIsSumbitting } from "@/stores/submitting";
 
 export const useHandleExpense = () => {
   const baseURL = import.meta.env.VITE_API_BASE_URL;
@@ -13,6 +14,8 @@ export const useHandleExpense = () => {
 
   const { handleIsLogin } = useAuthStore();
   const router = useRouter();
+
+  const { startSubmiting, stopSubmitting } = useIsSumbitting();
 
   const getExpense = async () => {
     const response = await axios.get(`${baseURL}/expense`);
@@ -30,6 +33,7 @@ export const useHandleExpense = () => {
   };
 
   const addExpense = async (expenseData) => {
+    startSubmiting();
     try {
       const response = await axios.post(`${baseURL}/expense`, expenseData, {
         withCredentials: true,
@@ -38,6 +42,7 @@ export const useHandleExpense = () => {
       useNotify("berhasil menambahkan data", "success");
       setTimeout(() => {
         router.push("/expense");
+        stopSubmitting();
       }, 1500);
     } catch (error) {
       if (error.response.status) {
@@ -46,11 +51,13 @@ export const useHandleExpense = () => {
           router.push("/");
           handleIsLogin(false);
         }, 1500);
+        stopSubmitting();
       }
     }
   };
 
   const editExpense = async (expenseData, id) => {
+    startSubmiting();
     try {
       const response = await axios.put(`${baseURL}/expense/${id}`, expenseData, {
         withCredentials: true,
@@ -59,6 +66,7 @@ export const useHandleExpense = () => {
       useNotify("berhasil mengedit data", "success");
       setTimeout(() => {
         router.push("/expense");
+        stopSubmitting();
       }, 1500);
     } catch (error) {
       if (error.response.status) {
@@ -67,8 +75,10 @@ export const useHandleExpense = () => {
           router.push("/");
           handleIsLogin(false);
         }, 1500);
+        stopSubmitting();
       }
     }
+    stopSubmitting();
   };
 
   const deleteExpense = async (id) => {

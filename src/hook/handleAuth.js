@@ -5,9 +5,11 @@ import { useRouter } from "vue-router";
 import axios from "axios";
 import { useAuthStore } from "@/stores/auth";
 import { useNotify } from "@/utils/utils";
+import { useIsSumbitting } from "@/stores/submitting";
 
 export const useHandleAuth = () => {
   const { role, setRole, handleIsLogin, closeModalLogout } = useAuthStore();
+  const { startSubmiting, stopSubmitting, isSubmit } = useIsSumbitting();
 
   const showPassword = ref(false);
   const router = useRouter();
@@ -30,10 +32,14 @@ export const useHandleAuth = () => {
       password: { required, minLength: minLength(6) },
     };
   });
+
   const v$ = useVuelidate(rules, dataLogin);
   const baseURL = import.meta.env.VITE_API_BASE_URL;
+
   const handleLogin = async () => {
     const result = await v$.value.$validate();
+    startSubmiting();
+
     try {
       const response = await axios.post(`${baseURL}/auth/login`, dataLogin, {
         withCredentials: true,
@@ -44,11 +50,13 @@ export const useHandleAuth = () => {
       setRole(roleName);
 
       useNotify("Login berhasil", "success");
+      stopSubmitting();
       setTimeout(() => {
         router.push("/");
       }, 2000);
     } catch (error) {
       useNotify("Email/Password yang kamu masukan salah", "error");
+      stopSubmitting();
     }
   };
 

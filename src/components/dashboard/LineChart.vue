@@ -12,7 +12,11 @@ const { detailIncomePerQuarter } = useYearIncomeStore();
 const { getIncomePerQuarter, incomeQuarter, loading } = useGetIncomePerRt();
 
 onMounted(() => {
-  getIncomePerQuarter();
+  if (detailIncomePerQuarter) {
+    getIncomePerQuarter(detailIncomePerQuarter.rt, detailIncomePerQuarter.year, detailIncomePerQuarter.quarter);
+  } else {
+    getIncomePerQuarter();
+  }
 });
 
 watch(detailIncomePerQuarter, () => {

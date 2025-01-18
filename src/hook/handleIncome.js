@@ -3,6 +3,7 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
+import { useIsSumbitting } from "@/stores/submitting";
 
 export const useHandleIncome = () => {
   const baseURL = import.meta.env.VITE_API_BASE_URL;
@@ -13,6 +14,8 @@ export const useHandleIncome = () => {
 
   const router = useRouter();
   const { handleIsLogin } = useAuthStore();
+
+  const { startSubmiting, stopSubmitting } = useIsSumbitting();
 
   const getIncome = async () => {
     try {
@@ -37,6 +40,7 @@ export const useHandleIncome = () => {
     }
   };
   const addIncome = async (incomeData) => {
+    startSubmiting();
     try {
       const response = await axios.post(`${baseURL}/income`, incomeData, {
         withCredentials: true,
@@ -45,6 +49,7 @@ export const useHandleIncome = () => {
       useNotify("berhasil menambahkan data", "success");
       setTimeout(() => {
         router.push("/income");
+        stopSubmitting();
       }, 1500);
     } catch (error) {
       if (error.response.status === 401) {
@@ -54,11 +59,13 @@ export const useHandleIncome = () => {
           handleIsLogin(false);
         }, 1500);
       }
+      stopSubmitting();
       useNotify(error.response.data.msg, "error");
     }
   };
 
   const editIncome = async (incomeData, id) => {
+    startSubmiting();
     try {
       const response = await axios.put(`${baseURL}/income/${id}`, incomeData, {
         withCredentials: true,
@@ -67,6 +74,7 @@ export const useHandleIncome = () => {
       useNotify("berhasil menambahkan data", "success");
       setTimeout(() => {
         router.push("/income");
+        stopSubmitting();
       }, 1500);
     } catch (error) {
       if (error.response.status === 401) {
@@ -75,6 +83,7 @@ export const useHandleIncome = () => {
           router.push("/");
           handleIsLogin(false);
         }, 1500);
+        stopSubmitting();
       }
 
       useNotify(error.response.data.msg, "error");

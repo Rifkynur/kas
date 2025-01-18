@@ -2,7 +2,9 @@
 import { EyeIcon, EyeSlashIcon, EnvelopeIcon } from "@heroicons/vue/24/solid";
 import { useHandleAuth } from "@/hook/handleAuth";
 import Logo from "../../public/letter-s (1).png";
+import { useIsSumbitting } from "@/stores/submitting";
 
+const submit = useIsSumbitting();
 const { showPassword, goBack, handleShowPassword, v$, handleLogin, getValidationMessage, dataLogin } = useHandleAuth();
 </script>
 
@@ -45,9 +47,9 @@ const { showPassword, goBack, handleShowPassword, v$, handleLogin, getValidation
             {{ getValidationMessage("password") }}
           </p>
           <div class="flex flex-col gap-2">
-            <button class="bg-blue-500 py-1 font-semibold" type="submit">Login</button>
+            <button class="bg-blue-500 py-1 font-semibold" type="submit" :disabled="submit.isSubmit">{{ submit.isSubmit ? "Bentar ya..." : "Login" }}</button>
           </div>
-          <p class="text-center text-[8px] capitalize lg:text-[10px]">&copy; sedyo utomo</p>
+          <p class="text-center text-[9px] capitalize lg:text-[12px]">&copy; sedyo utomo</p>
         </form>
       </div>
     </div>
