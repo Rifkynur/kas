@@ -189,7 +189,7 @@ export const getLineData = (income) => {
             return item.amount;
           }),
           borderWidth: 1,
-          pointRadius: window.innerWidth < 768 ? 3 : 5,
+          pointRadius: 5,
           pointBorderWidth: 1,
         },
       ],
