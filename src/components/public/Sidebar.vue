@@ -45,7 +45,7 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="sidebarRef"
-    class="p-6 bg-SidebarLight backdrop-blur-md w-fit border-r border-black/5 min-h-screen h-full origin-left absolute transition-all duration-300 z-10 md:static dark:bg-secondary text-white/70"
+    class="p-6 bg-SidebarLight backdrop-blur-md w-fit border-r border-black/5 min-h-screen inset-0 origin-left absolute transition-all duration-300 z-10 md:static dark:bg-secondary text-white/70"
     :class="sidebarIsOpen ? 'left-0' : '-left-full'"
   >
     <h2 class="text-xl font-bold mb-8 text-white">Menu</h2>
